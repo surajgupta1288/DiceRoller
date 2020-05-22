@@ -10,19 +10,26 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var diceImage : ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Get the Button view from the layout and assign a click
+        // listener to it.
         val rollButton: Button = findViewById(R.id.roll_button)
-        rollButton.setOnClickListener{
-            //Toast.makeText(this,"Button Has clicked",Toast.LENGTH_SHORT).show()
-            rollDice()
-        }
+        rollButton.setOnClickListener { rollDice() }
+        diceImage = findViewById(R.id.dice_image)
     }
 
+    /**
+     * Click listener for the Roll button.
+     */
     private fun rollDice() {
+        // Toast.makeText(this, "button clicked",
+        //  Toast.LENGTH_SHORT).show()
+        val randomInt = (1..6).random()
 
-        val randomInt =Random().nextInt(6) + 1
         val drawableResource = when (randomInt) {
             1 -> R.drawable.dice_1
             2 -> R.drawable.dice_2
@@ -31,8 +38,7 @@ class MainActivity : AppCompatActivity() {
             5 -> R.drawable.dice_5
             else -> R.drawable.dice_6
         }
-        val diceImage: ImageView = findViewById(R.id.dice_image)
-        diceImage.setImageResource(drawableResource)
 
+        diceImage.setImageResource(drawableResource)
     }
 }
